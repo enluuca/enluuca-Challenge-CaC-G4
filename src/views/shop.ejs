@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/header.ejs') %>
+            <main class="container">
+                <div class="shop_container">
+                    <!-- FILTRO -->
+                    <aside class="search_filters">
+                        <form class="search_box" action="">
+                            <label for="item_search">Buscar</label>
+                            <input type="text" id="item_search" name="item_search" />
+                        </form>
+                        <div class="ordenar_por">
+                            <label for="sorting_options">Ordenar por</label>
+                            <select name="sorting_options" id="sorting_options">
+                                <option value="mayor a menor">Mayor a menor</option>
+                                <option value="precio">Precio</option>
+                                <option value="reciente">Reciente</option>
+                            </select>
+                        </div>
+                        <div class="precio">
+                            <a>Precio</a>
+                            <form class="price_range_box" action="">
+                                <label for="min_price_range">Min</label>
+                                <input type="number" id="min_price_range" name="min_price_range" placeholder="0" />
+                                <a>-</a>
+                                <label for="max_price_range">Max</label>
+                                <input type="number" id="max_price_range" name="max_price_range" placeholder="0" />
+                            </form>
+                        </div>
+                        <div class="checkbox">
+                            <a>Filtrar</a>
+                            <div class="checkbox_filters">
+                                <div>
+                                    <input type="checkbox" id="nuevos" name="nuevos" />
+                                    <label for="nuevos">Nuevos</label>
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" id="ofertas" name="ofertas" />
+                                    <label for="ofertas">Ofertas</label>
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" id="edicion_especial" name="edicion_especial" />
+                                    <label for="edicion_especial">Edicion especial</label>
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" id="favoritos" name="favoritos" />
+                                    <label for="favoritos">Favoritos</label>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    <section class="shop_items_container">
+                        <!-- SHOP -->
+<% funkos.forEach(funko=> { %>
+    <ul class="lanzamientos__list glide__slides">
+        <li class="lanzamientos__card glide__slide">
+            <a href="/shop/item/<%=funko.product_id%>">
+                <span class="card__span">Nuevo</span>
+                <picture class="card__picture">
+                    <img class="card__image" onmouseover="this.src='<%= funko.img_back %>'"
+                        onmouseout="this.src='<%= funko.img_front %>'" src="<%= funko.img_front %>"
+                        alt="<%= funko.product_name %>" />
+                </picture>
+                <div class="card__info">
+                    <p class="card__category">
+                        <%= funko.licence_name %>
+                    </p>
+                    <h3 class="card__title">
+                        <%= funko.product_name %>
+                    </h3>
+                    <p class="card__price">$<%= funko.product_price %>
+                    </p>
+                    <p class="card__payments">3 CUOTAS SIN INTERÉS</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <% }); %>
+
+                    </section>
+                </div>
+                <section>
+                    <div class="pagination">
+                        <a class="pagination__item" href="#">&laquo;</a>
+                        <a class="pagination__item" href="#">1</a>
+                        <a class="pagination__item" class="active" href="#">2</a>
+                        <a class="pagination__item" href="#">3</a>
+                        <a class="pagination__item" href="#">4</a>
+                        <a class="pagination__item" href="#">&raquo;</a>
+                    </div>
+                </section>
+            </main>
+            <%- include('./partials/footer.ejs') %>
+    </body>
+
+</html>
